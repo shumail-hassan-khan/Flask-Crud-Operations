@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock title %} - My CRUD
+{% block body %}
+
+
+<div class="container my-3">
+  <h2>ADD ENTRY</h2>
+  <form method="POST" action="/">
+    <div class="mb-3">
+      <label for="title" class="form-label">FIRST NAME</label>
+      <input type="text" class="form-control" id="" aria-describedby="emailHelp" name="first">
+      <div id="emailHelp" class="form-text"></div>
+    </div>
+    <div class="mb-3">
+      <label for="desc" class="form-label">LAST NAME</label>
+      <input type="text" class="form-control" id="" name="last">
+    </div>
+    <div class="mb-3">
+      <label for="desc" class="form-label">AGE</label>
+      <input type="text" class="form-control" id="" name="age">
+    </div>
+    <button type="submit" class="btn btn-primary btn-light btn-outline-dark ">ADD</button>
+  </form>
+</div>
+<div class="container my-3">
+  <h2>MY ENTRIES</h2>
+  
+  {% if alltodo|length == 0 %}
+  <div class="alert alert-dark" role="alert">
+    No record found. Add your first Record Now!
+  </div>
+  {% else %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">sno</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Age</th>
+        <th scope="col">Date</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    {% endif %}
+
+    <tbody>
+      {% for todo in alltodo %}
+      <tr>
+        <td scope="row">{{loop.index}}</td>
+        <td>{{todo.first_name}}</td>
+        <td>{{todo.last_name}}</td>
+        <td>{{todo.age}}</td>
+        <td>{{todo.date_created}}</td>
+        <td><a href="/update/{{todo.sno}}" type="button"
+            class="btn btn-light btn-outline-dark btn-sm mx-1">UPDATE</button></td>
+        <td><a href="/delete/{{todo.sno}}" type="button"
+            class="btn btn-light btn-outline-dark btn-sm mx-1">DELETE</button></td>
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+
+
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+  integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
+  integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+
+{% endblock body %}
